@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id
+}
+
+model Game {
+  id Int @id @default(autoincrement()) //le @ cest la directive, donc la directive id cle primaire
+  titre String 
+  description String
+  releaseDate DateTime
+
+  genreId Int
+  genre Genre @relation(fields: [genreId], references:[id])  //un jeu peu avoir qu'un genre donc connexion entre l'id du genre de la table "genre" et la variable "genreId" du jeu
+
+  editeurId Int
+  editeur Editeur @relation(fields: [editeurId], references:[id]) //un jeu peu avoir qu'un editeur, il va prendre l'id de l'editeur et connexion en tant que clé etrangere
+}
+
+model Genre {
+  id Int @id @default(autoincrement())
+  nom String
+  jeux Game[] //un genre peut avoir plusieurs jeux
+  }
+
+model Editeur {
+  id Int @id @default(autoincrement())
+  nom String
+  jeux Game[] //un editeur peut avoir plusieurs jeux
+}
