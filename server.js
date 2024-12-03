@@ -32,3 +32,16 @@ app.listen(PORT, () => {
     console.log(`Ca marche sur le port ${PORT}`);
 });
 
+
+const jeu = {
+    titre: "test",
+    descritption: "test",
+    releaseDate: new Date("20010-07-16"),
+
+
+};
+
+// const no = await prisma.Game.create({
+//     data: jeu, 
+
+// });
