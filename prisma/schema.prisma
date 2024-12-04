@@ -13,9 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id Int @id
-}
 
 model Game {
   id Int @id @default(autoincrement()) //le @ cest la directive, donc la directive id cle primaire
