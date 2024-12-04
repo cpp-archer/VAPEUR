@@ -1,12 +1,14 @@
 JE SUIS DANS LE JEU
 <a href="../">RETOUR accueil (page precedente)</a> <!--en groooos, ca permet de retourner a la page d'avant, comme dans le cmd)!-->
 
-{{!-- <ul>
-    {{#each movies}}
+<ul>
+    {{#each jeu}} <!--la variable qu'on a cree dans server qui stock tout les jeux!-->
         <li>
-            <a href="/JEUX/{{id}}">{{titre}}</a>
-            <p>Genre : {{Genre.nom}}</p> <!--affiche le genre du jeu!-->
-            <p>Éditeur: {{Editeur.nom}}</p>
+            <a href="/Jeux/{{titre}}">{{titre}}</a> <!--dans la route yaura marqué le nom du jeu mais si jmet id a la place du premier bah ce serra l'if!-->
+            
+            <!-- pour la page qui affiche tout les jeux on s'en fout , mais A REUTILISER DANS DETAILS PEUT ETRE!-->
+            {{!-- <p>Genre : {{genreId}}</p> <!--affiche le genre du jeu!-->
+            <p>Éditeur: {{editeurId}}</p> --}}
         </li>
     {{/each}}
-</ul> --}}
+</ul>
