@@ -1,5 +1,19 @@
-<h1>details du jeu </h1>  <!--detail du jeu cliqué!-->
-<p>Nom du jeu : </p>
-<p>Genre du jeu : </p>
-<p> Editeur du jeu:</p>
-{{!-- <p> Date de sortie: {{jeu.dateSortie}}</p> --}}
+
+{{#each jeu}}
+<h1>Nom du jeu : {{titre}}</h1>
+<p>Descr : {{description}}</p>
+<p>Date de sortie: {{releaseDate}}</p>
+{{/each}}
+
+{{#each genre}}
+<p>Genre : {{nom}}</p>  <!--ya deja la condition dans le serv pour que ce soit le genre du jeu-->
+{{/each}}
+
+{{#each editeurs}}
+<p>Éditeur : {{nom}}</p>
+{{/each}}
+
+
+<a href="/Jeux">Retour à la liste des jeux</a>
+
+
