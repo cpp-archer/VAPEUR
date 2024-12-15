@@ -16,14 +16,30 @@ app.get("/", async (req, res) => {
     //res.send();
 });
 
+//******************************AFFICHAGE DE TOUT LES JEUX GENRE ET EDITEURS ET LEUR ROUTE**************************************************//
+
 //on va dans la route /jeux qu'on a creer en tant que href et on recup l'index du doss JEUX
 app.get("/Jeux", async (req,res)=> { 
     const jeu = await prisma.Game.findMany(); // on va prendre tout les jeux de la table Game
-    
     res.render("Jeux/index", {jeu}); //on les renvois à index
 })
 
+//on va dans la route /genre qu'on a creer en tant que href et on recup l'index du doss Genres
+app.get("/Genres", async (req,res)=> { 
+    const genres = await prisma.Genre.findMany(); // on va prendre tout les genres de la table Genre
+    res.render("Genres/index", {genres}); //on les renvois à index
+})
 
+//on va dans la route /genre qu'on a creer en tant que href et on recup l'index du doss Genres
+app.get("/Editeurs", async (req,res)=> { 
+    const editeurs = await prisma.Editeur.findMany(); // on va prendre tout les genres de la table Genre
+    res.render("Editeurs/index", {editeurs}); //on les renvois à index
+})
+//*********************************************************************************************************************************//
+
+
+
+//*************************AFFICHAGE DES DETAILS JEUX + JEUX AFFILIES AUX GENRE ET EDITEURS**********************************//
 //quand on clique sur un jeu, on va sur son detail 
 app.get("/Jeux/:titre/details", async (req,res)=> {
 
@@ -34,13 +50,19 @@ app.get("/Jeux/:titre/details", async (req,res)=> {
     res.render("Jeux/DetailsJeux", {jeu,genre, editeurs});
 })
 
-//on va dans la route /genre et on recup l'index du doss GENRE
-app.get("/Genres", async (req,res)=> { 
-    const genre = await prisma.Genre.findMany();
-    res.render("Genres/index");
+app.get("/Genres/:id/jdg", async (req,res)=> { //jdg = jeux du genre
+    
+    const jeu = await prisma.Game.findMany({where: {genreId: parseInt(req.params.id)}});
+    res.render("Genres/index", {jeu});
 })
 
- //on va dans la route /editeurs et on recup l'index du doss ED
+app.get("/Editeurs/:id/jde", async (req,res)=> { //jdg = jeux de l'editeur
+    const jeu = await prisma.Game.findMany({where: {editeurId: parseInt(req.params.id)}}); 
+    res.render("Editeurs/index", {jeu});
+})
+//*************************FIN************************************************************************************************//
+
+//on va dans la route /editeurs et on recup l'index du doss ED
 app.get("/Editeurs", async (req,res)=> {
     res.render("Editeurs/index");
 })

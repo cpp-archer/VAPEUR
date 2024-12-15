@@ -1,0 +1,18 @@
+JE SUIS DANS LES GENRES
+<a href="../">RETOUR accueil (page precedente)</a> 
+
+<ul>
+    {{#each genres}} 
+        <li>
+            <a href="/Genres/{{id}}/jdg">{{nom}}</a> 
+
+
+        </li>
+    {{/each}}
+    {{#each jeu}}
+        <li>
+            <a href="/Jeux/{{titre}}/details">{{titre}}</a> 
+        </li>
+    {{/each}}
+</ul>
+
