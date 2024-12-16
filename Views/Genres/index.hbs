@@ -1,12 +1,14 @@
-JE SUIS DANS LES GENRES
-<a href="../">RETOUR à la page precedente</a> 
+{{#if genres}}
+    <h1>Liste des genres</h1>
+{{/if}}
 
+{{#if jeu}}
+    <h1>Liste des jeux du genre</h1>
+{{/if}}
 <ul>
     {{#each genres}} 
         <li>
             <a href="/Genres/{{id}}/jdg">{{nom}}</a> 
-
-
         </li>
     {{/each}}
     {{#each jeu}}
@@ -16,3 +18,4 @@ JE SUIS DANS LES GENRES
     {{/each}}
 </ul>
 
+<a href="../">RETOUR à la page precedente</a> 

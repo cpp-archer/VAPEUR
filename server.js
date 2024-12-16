@@ -1,3 +1,4 @@
+//config
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const path = require("path"); //on utilise path car ca s'adapte a tuot les systeme d'expl:oitation
@@ -51,7 +52,6 @@ app.get("/Jeux/:titre/details", async (req,res)=> {
 })
 
 app.get("/Genres/:id/jdg", async (req,res)=> { //jdg = jeux du genre
-    
     const jeu = await prisma.Game.findMany({where: {genreId: parseInt(req.params.id)}});
     res.render("Genres/index", {jeu});
 })
@@ -70,6 +70,21 @@ app.get("/Editeurs", async (req,res)=> {
 app.listen(PORT, () => {
     console.log(`Ca marche sur le port ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
