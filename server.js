@@ -1,29 +1,22 @@
 //config
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-const path = require("path"); //on utilise path car ca s'adapte a tuot les systeme d'expl:oitation
+const path = require("path"); // S'adapte à tous les systèmes d'exploitation
 const app = express();
 const PORT = 3005;
 
-// config notre moteur de template
+// Configuration du moteur de template
 app.set("view engine", "hbs"); 
 app.set("views", path.join(__dirname, "views"));
+
 const prisma = new PrismaClient();
 
-//page d'accueil
+// Page d'accueil
 app.get("/", async (req, res) => {
     res.render("accueil");
-    // createTestDb();
-    //res.send();
 });
 
-//******************************AFFICHAGE DE TOUT LES JEUX GENRE ET EDITEURS ET LEUR ROUTE**************************************************//
 
-//on va dans la route /jeux qu'on a creer en tant que href et on recup l'index du doss JEUX
-app.get("/Jeux", async (req,res)=> { 
-    const jeu = await prisma.Game.findMany(); // on va prendre tout les jeux de la table Game
-    res.render("Jeux/index", {jeu}); //on les renvois à index
-})
 
 //on va dans la route /genre qu'on a creer en tant que href et on recup l'index du doss Genres
 app.get("/Genres", async (req,res)=> { 
@@ -40,16 +33,74 @@ app.get("/Editeurs", async (req,res)=> {
 
 
 
-//*************************AFFICHAGE DES DETAILS JEUX + JEUX AFFILIES AUX GENRE ET EDITEURS**********************************//
-//quand on clique sur un jeu, on va sur son detail 
-app.get("/Jeux/:titre/details", async (req,res)=> {
 
-    //je peux pas parce que titre est pas unique... jvais essayer ID 
-    const jeu = await prisma.Game.findMany({where: {titre: req.params.titre},});
-    const genre = await prisma.Genre.findMany({where: {id: jeu[0].genreId}}); //vu que tout les jeux sont dans un tableau
-    const editeurs = await prisma.Editeur.findMany({where: {id: jeu[0].editeurId}});
-    res.render("Jeux/DetailsJeux", {jeu,genre, editeurs});
-})
+// Route pour lister tous les jeux
+app.get("/Jeux", async (req, res) => { 
+    try {
+        const jeux = await prisma.Game.findMany({
+            orderBy: { titre: 'asc' } // Tri par ordre alphabétique
+        });
+        res.render("Jeux/index", { jeux }); // On renvoie les jeux à la vue
+    } catch (error) {
+        res.status(500).send("Erreur lors de la récupération des jeux.");
+    }
+});
+
+app.get("/Jeux/:id/details", async (req, res) => {
+    try {
+        // Verifie que l'ID est bien un entier valide
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            console.log("ID de jeu invalide :", req.params.id);
+            return res.status(400).send("ID de jeu invalide.");
+        }
+
+        // Vérifi que le jeu demandé existe
+        const jeu = await prisma.Game.findUnique({
+            where: { id },
+            include: {
+                genre: true, 
+                editeur: true 
+            }
+        });
+
+        if (!jeu) {
+            console.log(`Aucun jeu trouvé avec l'ID ${id}`);
+            return res.status(404).send("Jeu non trouvé.");
+        }
+
+        console.log("Détails du jeu trouvé :", jeu);
+        res.render("Jeux/DetailsJeux", { jeu });
+
+    } catch (error) { // Renvoie les erreurs
+        console.error("Erreur lors de la récupération du détail du jeu :", error);
+        res.status(500).send("Erreur lors de la récupération du détail du jeu.");
+    }
+});
+
+
+app.post("/Jeux/:id/delete", async (req, res) => {
+    try {
+        // Verifie que l'ID est bien un entier valide
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            console.log("ID de jeu invalide :", req.params.id);
+            return res.status(400).send("ID de jeu invalide.");
+        }
+
+        // Suprime le Jeu actuelle en récupérent l'id dans l'url
+        await prisma.Game.delete({
+            where: { id }
+        });
+
+        console.log(`Jeu avec l'ID ${id} supprimé.`);
+        res.redirect("/");
+
+    } catch (error) { // Renvoie les erreurs
+        console.error("Erreur lors de la suppression du jeu :", error);
+        res.status(500).send("Erreur lors de la suppression du jeu.");
+    }
+});
 
 app.get("/Genres/:id/jdg", async (req,res)=> { //jdg = jeux du genre
     const jeu = await prisma.Game.findMany({where: {genreId: parseInt(req.params.id)}});

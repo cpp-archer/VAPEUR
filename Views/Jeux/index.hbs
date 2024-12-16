@@ -1,9 +1,15 @@
 <h1>Liste des jeux</h1>
 <a href="../">RETOUR à la page precedente</a>
 <ul>
-    {{#each jeu}} 
+
+    {{#each jeux}} <!--la variable qu'on a cree dans server qui stock tout les jeux!-->
         <li>
-            <a href="/Jeux/{{titre}}/details">{{titre}}</a> 
+            <a href="/Jeux/{{id}}/details">{{titre}}</a><!--dans la route yaura marqué le nom du jeu mais si jmet id a la place du premier bah ce serra l'if!-->
+            
+            <!-- pour la page qui affiche tout les jeux on s'en fout , mais A REUTILISER DANS DETAILS PEUT ETRE!-->
+            {{!-- <p>Genre : {{genreId}}</p> <!--affiche le genre du jeu!-->
+            <p>Éditeur: {{editeurId}}</p> --}}
+
         </li>
     {{/each}}
 </ul>
