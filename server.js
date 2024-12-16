@@ -2,6 +2,7 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const path = require("path"); // S'adapte à tous les systèmes d'exploitation
+const { create } = require("hbs");
 const app = express();
 const PORT = 3005;
 
@@ -14,6 +15,7 @@ const prisma = new PrismaClient();
 // Page d'accueil
 app.get("/", async (req, res) => {
     res.render("accueil");
+    // createTestDb();
 });
 
 
