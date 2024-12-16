@@ -1,20 +1,12 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-const path = require("path");
-const methodOverride = require('method-override');  // Déplace cette ligne ici
+const path = require("path"); // S'adapte à tous les systèmes d'exploitation
 const app = express();
 const PORT = 3005;
 
 // Configuration du moteur de template
 app.set("view engine", "hbs"); 
 app.set("views", path.join(__dirname, "views"));
-
-// Ajout des middlewares pour gérer les formulaires et les requêtes POST
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Ajout de methodOverride pour delete
-app.use(methodOverride('_method'));  
 
 const prisma = new PrismaClient();
 
@@ -35,16 +27,16 @@ app.get("/Jeux", async (req, res) => {
     }
 });
 
-// Route pour afficher les detail d'un jeu
 app.get("/Jeux/:id/details", async (req, res) => {
     try {
+        // Verifie que l'ID est bien un entier valide
         const id = parseInt(req.params.id, 10);
         if (isNaN(id)) {
             console.log("ID de jeu invalide :", req.params.id);
             return res.status(400).send("ID de jeu invalide.");
         }
 
-        // Vérification de si le jeu existe bien
+        // Vérifi que le jeu demandé existe
         const jeu = await prisma.Game.findUnique({
             where: { id },
             include: {
@@ -61,30 +53,30 @@ app.get("/Jeux/:id/details", async (req, res) => {
         console.log("Détails du jeu trouvé :", jeu);
         res.render("Jeux/DetailsJeux", { jeu });
 
-    } catch (error) { // Si pas de jeu trouvé alors return les erreur
+    } catch (error) { // Renvoie les erreurs
         console.error("Erreur lors de la récupération du détail du jeu :", error);
         res.status(500).send("Erreur lors de la récupération du détail du jeu.");
     }
 });
 
-// Route pour suprimer un Jeu
-app.delete("/Jeux/:id/delete", async (req, res) => {
+app.post("/Jeux/:id/delete", async (req, res) => {
     try {
+        // Verifie que l'ID est bien un entier valide
         const id = parseInt(req.params.id, 10);
-        // Verification que le jeu est bien trouvé
         if (isNaN(id)) {
             console.log("ID de jeu invalide :", req.params.id);
             return res.status(400).send("ID de jeu invalide.");
         }
 
-        // Suprime
+        // Suprime le Jeu actuelle en récupérent l'id dans l'url
         await prisma.Game.delete({
             where: { id }
         });
 
         console.log(`Jeu avec l'ID ${id} supprimé.`);
-        res.redirect("/"); // Redirection vers la page d'accueil après la suppression
-    } catch (error) {
+        res.redirect("/");
+
+    } catch (error) { // Renvoie les erreurs
         console.error("Erreur lors de la suppression du jeu :", error);
         res.status(500).send("Erreur lors de la suppression du jeu.");
     }
