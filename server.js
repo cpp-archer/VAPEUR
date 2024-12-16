@@ -62,25 +62,12 @@ app.get("/Editeurs/:id/jde", async (req,res)=> { //jdg = jeux de l'editeur
 })
 //*************************FIN************************************************************************************************//
 
-//on va dans la route /editeurs et on recup l'index du doss ED
-app.get("/Editeurs", async (req,res)=> {
-    res.render("Editeurs/index");
-})
+
+
 
 app.listen(PORT, () => {
     console.log(`Ca marche sur le port ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
