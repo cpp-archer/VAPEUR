@@ -63,15 +63,9 @@ app.get("/Editeurs/:id/jde", async (req,res)=> { //jdg = jeux de l'editeur
 //*************************FIN************************************************************************************************//
 
 
-
-
 app.listen(PORT, () => {
     console.log(`Ca marche sur le port ${PORT}`);
 });
-
-
-
-
 
 
 
