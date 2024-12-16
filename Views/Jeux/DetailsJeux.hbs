@@ -1,6 +1,21 @@
-<a href="../">RETOUR accueil (page précédente)</a>
 
-<h1>Détails du jeu</h1>
+<h1>Détails du jeu </h1>
+{{#each jeu}}
+    <h2>Nom du jeu : {{titre}}</h2>
+    <p>Description du jeu : {{description}}</p>
+    <p>Date de sortie: {{releaseDate}}</p>
+{{/each}}
+
+{{#each genre}}
+    <p>Genre :<a href="/Genres/{{id}}/jdg"> {{nom}}</a> </p> <!--ya deja la condition dans le serv pour que ce soit le genre du jeu-->  
+{{/each}}
+
+{{#each editeurs}}
+    <p>Éditeur : <a href="/Editeurs/{{id}}/jde"> {{nom}}</a></p>
+{{/each}}
+
+<button type="button"> Mettre à la une</button>
+
 
 <!-- Affiche tote les informations relative au jeu selectione -->
 <h2>Titre : {{jeu.titre}}</h2>
@@ -9,7 +24,11 @@
 <p>Genre : {{jeu.genre.nom}}</p>
 <p>Éditeur : {{jeu.editeur.nom}}</p> 
 
+
+<p><a href="/Jeux">Retour à la liste des jeux</a></p>
+
 <!-- Boutton suprimer (a changer le style quand on fera un css) -->
 <form action="/Jeux/{{jeu.id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu ?');">
     <button type="submit" style="color: white; background-color: red; padding: 10px 20px; border: none; border-radius: 5px;">Supprimer ce jeu</button>
 </form>
+
