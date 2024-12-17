@@ -2,14 +2,14 @@
 
 <h1>Détails du jeu</h1>
 
-<!-- Affiche tote les informations relative au jeu selectione -->
+<!-- Affiche toute les informations relative au jeu selectione -->
 <h2>Titre : {{jeu.titre}}</h2>
 <p>Description : {{jeu.description}}</p>
 <p>Date de sortie : {{jeu.releaseDate}}</p>
 <p>Genre : {{jeu.genre.nom}}</p>
 <p>Éditeur : {{jeu.editeur.nom}}</p> 
 
-<!-- Boutton suprimer (a changer le style quand on fera un css) -->
+<!-- Boutton suprimer (à changer le style quand on fera un css) -->
 <form action="/Jeux/{{jeu.id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu ?');">
     <button type="submit" style="color: white; background-color: red; padding: 10px 20px; border: none; border-radius: 5px;">Supprimer ce jeu</button>
 </form>
