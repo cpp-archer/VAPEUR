@@ -1,4 +1,5 @@
-{{#if genres}}
+
+{{#if editeurs}}
     <h1>Liste des editeurs</h1>
 {{/if}}
 
@@ -6,16 +7,16 @@
     <h1>Liste des jeux de l'editeur</h1>
 {{/if}}
 
-<a href="../">RETOUR à la page precedente</a> 
-<a href="/Editeurs/Ajouter">Ajouter un éditeur</a>
-
 
 <ul>
     {{#each editeurs}} 
     
         <li>
             <a href="/Editeurs/{{id}}/jde">{{nom}}</a>
-            <a href="/Editeurs/{{id}}/edit">Modifier un éditeur</a>
+            <form action="/Editeurs/{{id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet éditeur ?');">
+                <button type="submit" style="color: white; background-color: red; padding: 5px 10px; border: none; border-radius: 5px;">Supprimer l'éditeur</button>
+            </form>
+
         </li>
     {{/each}}
     {{#each jeu}}
@@ -25,3 +26,7 @@
         </li>
     {{/each}}
 </ul>
+
+
+<p><a href="/Editeurs/Ajouter">Ajouter un éditeur</a></p>
+<p><a href="../">RETOUR à la page precedente</a> </p>
