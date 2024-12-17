@@ -1,8 +1,9 @@
-<!--En gros ca c'est la page de base dans lequel on va recup les autres !-->
-<p><a href="/Jeux">JEUX </a> </p><!-- on va dans un lien vers localhost:3005/Jeux/ (pas dans la categorie jeux) ca mene dans l'url en gros !-->
+<!--page d'accueil / liens d'accès aux autres pages-->
+<p><a href="/Jeux">JEUX </a> </p>
 <p><a href="/Genres">GENRES </a></p>
 <p><a href="/Editeurs">EDITEURS </a></p>
 
+<!--affichage des jeux mis en avant-->
 <h1>Jeux mis à la une /en avant</h1>
 <ul>
 {{#if jeuxEnAvant}}
@@ -11,6 +12,6 @@
                 <li> <a href="/Jeux/{{id}}/details">{{titre}}</a> </li>              
     {{/each}}
 {{else}}
-    <li>Pas de jeux</li>
+    <li>Pas de jeux à la une </li>
 {{/if}}
 </ul>

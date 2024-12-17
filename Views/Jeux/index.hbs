@@ -1,11 +1,10 @@
+<!--Index.hbs des jeux-->
 <h1>Liste des jeux</h1>
 
 <ul>
-
-    {{#each jeux}} <!--la variable qu'on a cree dans server qui stock tout les jeux!-->
+    {{#each jeux}} 
         <li>
-            <a href="/Jeux/{{id}}/details">{{titre}}</a><!--dans la route yaura marqué le nom du jeu mais si jmet id a la place du premier bah ce serra l'if!-->
-        
+            <a href="/Jeux/{{id}}/details">{{titre}}</a>
         </li>
     {{/each}}
 </ul>
