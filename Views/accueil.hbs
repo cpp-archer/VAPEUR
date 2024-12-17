@@ -5,11 +5,12 @@
 
 <h1>Jeux mis à la une /en avant</h1>
 <ul>
+{{#if jeuxEnAvant}}
     {{#each jeuxEnAvant}}
-        <li>
-            {{titre}} {{description}} {{releaseDate}}
-        </li>
-    {{else}}
-        <li>Pas de jeux</li>
+            
+                <li> <a href="/Jeux/{{id}}/details">{{titre}}</a> </li>              
     {{/each}}
+{{else}}
+    <li>Pas de jeux</li>
+{{/if}}
 </ul>

@@ -1,22 +1,3 @@
-
-{{!-- <h1>Détails du jeu </h1>
-{{#each jeu}}
-    <h2>Nom du jeu : {{titre}}</h2>
-    <p>Description du jeu : {{description}}</p>
-    <p>Date de sortie: {{releaseDate}}</p>
-{{/each}}
-
-{{#each genre}}
-    <p>Genre :<a href="/Genres/{{id}}/jdg"> {{nom}}</a> </p> <!--ya deja la condition dans le serv pour que ce soit le genre du jeu-->  
-{{/each}}
-
-{{#each editeurs}}
-    <p>Éditeur : <a href="/Editeurs/{{id}}/jde"> {{nom}}</a></p>
-{{/each}}
-
-<button type="button"> Mettre à la une</button> --}}
-
-
 <!-- Affiche tote les informations relative au jeu selectione -->
 <h2>Titre : {{jeu.titre}}</h2>
 <p>Description : {{jeu.description}}</p>
@@ -24,22 +5,35 @@
 <p>Genre : <a href="/Genres/{{jeu.genre.id}}/jdg"> {{jeu.genre.nom}}</a></p>
 <p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
 
+{{#if jeu.editeur}}
+        <p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
+{{else}}
+        <p>Éditeur : Non renseigné </p>
+{{/if}}
 
-<p><a href="/Jeux">Retour à la liste des jeux</a></p>
+
 
 <!-- Boutton suprimer (a changer le style quand on fera un css) -->
 <form action="/Jeux/{{jeu.id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu ?');">
     <button type="submit" style="color: white; background-color: red; padding: 10px 20px; border: none; border-radius: 5px;">Supprimer ce jeu</button>
 </form>
 
-
-
-<form action="/Jeux/{{jeu.id}}/enAvant" method="POST">
-    <button type="submit" style="color: white; background-color: green; padding: 10px 20px; border: none; border-radius: 5px;">
     {{#if jeu.enAvant}}
-        Retirer de la mise en avant
-    {{else}}
-        Mettre en avant
-    {{/if}}
+    <form action="/Jeux/{{jeu.id}}/notEnAvant" method="POST">
+    <button type="submit" style="color: white; background-color: green; padding: 10px 20px; border: none; border-radius: 5px;">
+         Retirer de la mise en avant
     </button>
 </form>
+       
+    {{else}}
+    
+<form action="/Jeux/{{jeu.id}}/enAvant" method="POST">
+    <button type="submit" style="color: white; background-color: green; padding: 10px 20px; border: none; border-radius: 5px;">
+        Mettre en avant
+    </button>
+</form>
+    {{/if}}
+
+
+
+<p><a href="/Jeux">Retour à la liste des jeux</a></p>
