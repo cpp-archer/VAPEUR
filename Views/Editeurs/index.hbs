@@ -16,9 +16,10 @@
             <form action="/Editeurs/{{id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet éditeur ?');">
                 <button type="submit" style="color: white; background-color: red; padding: 5px 10px; border: none; border-radius: 5px;">Supprimer l'éditeur</button>
             </form>
-
+            <p><a href="/Editeurs/{{id}}/edit">Modifier un éditeur</a></p>
         </li>
     {{/each}}
+
     {{#each jeu}}
         <li>
             <a href="/Jeux/{{id}}/details">{{titre}}</a>
