@@ -1,5 +1,5 @@
 
-<h1>Détails du jeu </h1>
+{{!-- <h1>Détails du jeu </h1>
 {{#each jeu}}
     <h2>Nom du jeu : {{titre}}</h2>
     <p>Description du jeu : {{description}}</p>
@@ -14,15 +14,15 @@
     <p>Éditeur : <a href="/Editeurs/{{id}}/jde"> {{nom}}</a></p>
 {{/each}}
 
-<button type="button"> Mettre à la une</button>
+<button type="button"> Mettre à la une</button> --}}
 
 
 <!-- Affiche tote les informations relative au jeu selectione -->
 <h2>Titre : {{jeu.titre}}</h2>
 <p>Description : {{jeu.description}}</p>
 <p>Date de sortie : {{jeu.releaseDate}}</p>
-<p>Genre : {{jeu.genre.nom}}</p>
-<p>Éditeur : {{jeu.editeur.nom}}</p> 
+<p>Genre : <a href="/Genres/{{jeu.genre.id}}/jdg"> {{jeu.genre.nom}}</a></p>
+<p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
 
 
 <p><a href="/Jeux">Retour à la liste des jeux</a></p>
