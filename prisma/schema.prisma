@@ -23,8 +23,8 @@ model Game {
   genreId Int
   genre Genre @relation(fields: [genreId], references:[id])  //un jeu peu avoir qu'un genre donc connexion entre l'id du genre de la table "genre" et la variable "genreId" du jeu
 
-  editeurId Int
-  editeur Editeur @relation(fields: [editeurId], references:[id]) //un jeu peu avoir qu'un editeur, il va prendre l'id de l'editeur et connexion en tant que clé etrangere
+  editeurId Int?
+  editeur Editeur? @relation(fields: [editeurId], references:[id]) //un jeu peu avoir qu'un editeur, il va prendre l'id de l'editeur et connexion en tant que clé etrangere
 
   enAvant Boolean @default(false) 
 }

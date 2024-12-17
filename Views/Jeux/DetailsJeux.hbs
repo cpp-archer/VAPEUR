@@ -22,7 +22,12 @@
 <p>Description : {{jeu.description}}</p>
 <p>Date de sortie : {{jeu.releaseDate}}</p>
 <p>Genre : <a href="/Genres/{{jeu.genre.id}}/jdg"> {{jeu.genre.nom}}</a></p>
-<p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
+
+{{#if jeu.editeur}}
+        <p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
+{{else}}
+        <p>Éditeur : Non renseigné </p>
+{{/if}}
 
 
 <p><a href="/Jeux">Retour à la liste des jeux</a></p>
