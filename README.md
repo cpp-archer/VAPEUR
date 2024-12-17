@@ -15,8 +15,9 @@ PORT : 3005
 git clone https://github.com/cpp-archer/Vapeur.git
 
 # Installation et lancement
+```bash
 npm install express
 npm start
-
+```
 # Lien du serveur 
 http://localhost:3005/
