@@ -32,7 +32,49 @@ app.get("/Editeurs", async (req,res)=> {
     res.render("Editeurs/index", {editeurs}); //on les renvois à index
 })
 //*********************************************************************************************************************************//
+app.use(express.urlencoded({ extended: true })); // Gestion des formulaires POST
+app.use(express.json()); // Gestion des requêtes JSON
 
+app.post("/Jeux/Ajouter", async (req, res) => {
+    const { titre, description, releaseDate, genreId, editeurId } = req.body;
+
+    if (!titre || !description || !releaseDate || !genreId || !editeurId) {
+        return res.status(400).send("Tous les champs sont requis.");
+    }
+
+    try {
+        await prisma.Game.create({
+            data: {
+                titre,
+                description,
+                releaseDate: new Date(releaseDate),
+                genreId: parseInt(genreId),
+                editeurId: parseInt(editeurId),
+            },
+        });
+
+        // Redirection vers l'accueil avec un message de confirmation
+        res.redirect("/?message=Le jeu a été ajouté avec succès");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de l'ajout du jeu");
+    }
+});
+app.get("/Jeux/Ajouter", async (req, res) => {
+    try {
+        const genres = await prisma.Genre.findMany();
+        const editeurs = await prisma.Editeur.findMany();
+        res.render("Jeux/AjouterJeu", { genres, editeurs });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).send("Erreur interne du serveur");
+    }
+});
+
+app.get("/", async (req, res) => {
+    const message = req.query.message; // Récupère le message de la requête (s'il existe)
+    res.render("accueil");
+});
 
 
 
