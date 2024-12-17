@@ -1,15 +1,21 @@
+
+
 <h1>Liste des editeurs</h1>
 <a href="../">RETOUR à la page precedente</a> 
+<a href="/Editeurs/Ajouter">Ajouter un éditeur</a>
 
 <ul>
     {{#each editeurs}} 
+    
         <li>
             <a href="/Editeurs/{{id}}/jde">{{nom}}</a>
+            
         </li>
     {{/each}}
     {{#each jeu}}
         <li>
-            <a href="/Jeux/{{titre}}/details">{{titre}}</a> 
+            <a href="/Jeux/{{titre}}/details">{{titre}}</a>
+            
         </li>
     {{/each}}
 </ul>

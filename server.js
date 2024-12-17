@@ -162,7 +162,37 @@ app.listen(PORT, () => {
     console.log(`Ca marche sur le port ${PORT}`);
 });
 
+// Route pour afficher le formulaire d'ajout d'un éditeur
+app.get("/Editeurs/Ajouter", (req, res) => {
+    res.render("Editeurs/AjouterEditeur"); // Affiche la vue AjouterEditeur
+});
 
+// Middleware pour parser les données POST (assure-toi qu'il est bien configuré)
+// app.use(express.urlencoded({ extended: true }));
+
+// Route pour ajouter un éditeur dans la base de données
+app.post("/Editeurs/Ajouter", async (req, res) => {
+    const { nom } = req.body;
+
+    if (!nom) {
+        return res.status(400).send("Le champ nom est requis.");
+    }
+
+    try {
+        // Ajoute l'éditeur dans la base de données
+        await prisma.Editeur.create({
+            data: { nom },
+        });
+
+        // Redirige vers la liste des éditeurs avec un message
+        res.redirect("/Editeurs?message=L'éditeur a été ajouté avec succès");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de l'ajout de l'éditeur.");
+    }
+});
+
+// Route pour afficher la liste des éditeurs
 
 //creation de 3 jeux pour voir
 //test de base de donnée
