@@ -1,15 +1,21 @@
+{{#if genres}}
+    <h1>Liste des editeurs</h1>
+{{/if}}
 
+{{#if jeu}}
+    <h1>Liste des jeux de l'editeur</h1>
+{{/if}}
 
-<h1>Liste des editeurs</h1>
 <a href="../">RETOUR à la page precedente</a> 
 <a href="/Editeurs/Ajouter">Ajouter un éditeur</a>
+
 
 <ul>
     {{#each editeurs}} 
     
         <li>
             <a href="/Editeurs/{{id}}/jde">{{nom}}</a>
-            
+            <a href="/Editeurs/{{id}}/edit">Modifier un éditeur</a>
         </li>
     {{/each}}
     {{#each jeu}}

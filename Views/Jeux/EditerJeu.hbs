@@ -1,0 +1,26 @@
+<form action="/Jeux/{{jeu.id}}/edit" method="POST">
+  <label for="titre">Titre</label>
+  <input type="text" name="titre" value="{{jeu.titre}}" required />
+
+  <label for="description">Description</label>
+  <textarea name="description" required>{{jeu.description}}</textarea>
+
+  <label for="releaseDate">Date de sortie</label>
+  <input type="date" name="releaseDate" value="{{jeu.releaseDate}}" required />
+
+  <label for="genreId">Genre</label>
+  <select name="genreId" required>
+    {{#each genres}}
+      <option value="{{id}}" {{#if selected}}selected{{/if}}>{{nom}}</option>
+    {{/each}}
+  </select>
+
+  <label for="editeurId">Éditeur</label>
+  <select name="editeurId" required>
+    {{#each editeurs}}
+      <option value="{{id}}" {{#if selected}}selected{{/if}}>{{nom}}</option>
+    {{/each}}
+  </select>
+
+  <button type="submit">Mettre à jour</button>
+</form>
