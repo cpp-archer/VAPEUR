@@ -14,11 +14,29 @@ const prisma = new PrismaClient();
 
 // Page d'accueil
 app.get("/", async (req, res) => {
+    
+    const jeuxEnAvant = await prisma.Game.findMany({
+        where: {enAvant: true}, 
+    });
     res.render("accueil");
     // createTestDb();
 });
 
+app.post("/Jeux/:id/enAvant", async (req, res)=>{
+ 
+    try{     
+        const jeu = await prisma.Game.update({
+            where: {id: parseInt(req.params.id)},
+            data : {enAvant: !jeu.enAvant},
+            
+        });
 
+        res.render("/");    
+    }   catch(error){
+        console.error(error);
+        res.status(500).send("Nope");
+    }
+});
 
 //on va dans la route /genre qu'on a creer en tant que href et on recup l'index du doss Genres
 app.get("/Genres", async (req,res)=> { 
@@ -150,7 +168,6 @@ app.get("/Editeurs/Ajouter", (req, res) => {
     res.render("Editeurs/AjouterEditeur"); // Affiche la vue AjouterEditeur
 });
 
-// Middleware pour parser les données POST (assure-toi qu'il est bien configuré)
 // app.use(express.urlencoded({ extended: true }));
 
 // Route pour ajouter un éditeur dans la base de données
@@ -180,97 +197,97 @@ app.post("/Editeurs/Ajouter", async (req, res) => {
 //creation de 3 jeux pour voir
 //test de base de donnée
 //refaire car BORDEL
-// async function createTestDb()
-// {
-//     const jeu = {
-//         titre: "trr",
-//         description: "test",
-//         releaseDate: new Date(2018,22,1),
-//         genreId: 1,
-//         editeurId: 1
-//     };
+async function createTestDb()
+{
+    const jeu = {
+        titre: "trr",
+        description: "test",
+        releaseDate: new Date(2018,22,1),
+        genreId: 1,
+        editeurId: 1
+    };
 
     
-//     const genre = {
-//         nom: "FPS"
+    const genre = {
+        nom: "FPS"
 
-//     };
+    };
 
-//     const editeur = {
-//         nom: "RIOT"
+    const editeur = {
+        nom: "RIOT"
 
-//     };
+    };
 
-//     const ed = await prisma.Editeur.create({
-//         data: editeur, 
-//     });
-//     const gre = await prisma.Genre.create({
-//         data: genre, 
-//     });
+    const ed = await prisma.Editeur.create({
+        data: editeur, 
+    });
+    const gre = await prisma.Genre.create({
+        data: genre, 
+    });
 
-//     const je = await prisma.Game.create({
-//         data: jeu, 
-//     });
-
-
-// //test d'une deuxieme donnee pour voir si quand on clique les details sont bien affiliés au bon jeu
-//     const deux= {
-//         titre: "NOP",
-//         description: "NOP",
-//         releaseDate: new Date(2019,12,5),
-//         genreId: 2,
-//         editeurId: 2
-//     };
-
-//     const genre2 = {
-//         nom: "MMO"
-
-//     };
-
-//     const editeur2 = {
-//         nom: "NOOOO"
-
-//     };
-
-//     const ed2 = await prisma.Editeur.create({
-//         data: editeur2, 
-//     });
-//     const gre2 = await prisma.Genre.create({
-//         data: genre2, 
-//     });
-
-//     const je2 = await prisma.Game.create({
-//         data: deux, 
-//     });
+    const je = await prisma.Game.create({
+        data: jeu, 
+    });
 
 
-//      const trois= {
-//         titre: "YES",
-//         description: "YESSS",
-//         releaseDate: new Date(2017,13,9),
-//         genreId: 3,
-//         editeurId: 3
-//     };
+//test d'une deuxieme donnee pour voir si quand on clique les details sont bien affiliés au bon jeu
+    const deux= {
+        titre: "NOP",
+        description: "NOP",
+        releaseDate: new Date(2019,12,5),
+        genreId: 2,
+        editeurId: 2
+    };
 
-//     const genre3 = {
-//         nom: "ACTION"
+    const genre2 = {
+        nom: "MMO"
 
-//     };
+    };
 
-//     const editeur3 = {
-//         nom: "blooob"
+    const editeur2 = {
+        nom: "NOOOO"
 
-//     };
+    };
 
-//     const ed3 = await prisma.Editeur.create({
-//         data: editeur3, 
-//     });
-//     const gre3 = await prisma.Genre.create({
-//         data: genre3, 
-//     });
+    const ed2 = await prisma.Editeur.create({
+        data: editeur2, 
+    });
+    const gre2 = await prisma.Genre.create({
+        data: genre2, 
+    });
 
-//     const je3 = await prisma.Game.create({
-//         data: trois, 
-//     });
+    const je2 = await prisma.Game.create({
+        data: deux, 
+    });
 
-// }
+
+     const trois= {
+        titre: "YES",
+        description: "YESSS",
+        releaseDate: new Date(2017,13,9),
+        genreId: 3,
+        editeurId: 3
+    };
+
+    const genre3 = {
+        nom: "ACTION"
+
+    };
+
+    const editeur3 = {
+        nom: "blooob"
+
+    };
+
+    const ed3 = await prisma.Editeur.create({
+        data: editeur3, 
+    });
+    const gre3 = await prisma.Genre.create({
+        data: genre3, 
+    });
+
+    const je3 = await prisma.Game.create({
+        data: trois, 
+    });
+
+}

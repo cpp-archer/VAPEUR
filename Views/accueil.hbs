@@ -2,3 +2,14 @@
 <a href="/Jeux">JEUX </a> <!-- on va dans un lien vers localhost:3005/Jeux/ (pas dans la categorie jeux) ca mene dans l'url en gros !-->
 <a href="/Genres">Genres </a>
 <a href="/Editeurs">EDITEURS </a>
+
+<h1>Jeux mis à la une /en avant</h1>
+<ul>
+    {{#each jeuxEnAvant}}
+        <li>
+            {{titre}} {{description}} {{releaseDate}}
+        </li>
+    {{else}}
+        <li>Pas de jeux</li>
+    {{/each}}
+</ul>
