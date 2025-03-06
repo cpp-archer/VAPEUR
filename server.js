@@ -1,11 +1,14 @@
 //configurations
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-const path = require("path"); // S'adapte à tous les systèmes d'exploitation
+const path = require("path"); 
 const { create } = require("hbs");
 const app = express();
 const PORT = 3005;
 const prisma = new PrismaClient();
+
+
+
 
 //Configuration du moteur de template
 app.set("view engine", "hbs"); 
@@ -14,6 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 //Gestion des formulaires et requêtes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
+app.use(express.static("public"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ROUTES
@@ -302,11 +306,25 @@ app.get("/Genres/:id/jdg", async (req,res)=> { //jdg = jeux du genre
     res.render("Genres/index", {jeu});
 })
 
-app.get("/Editeurs/:id/jde", async (req,res)=> { //jde = jeux de l'editeur
-    const jeu = await prisma.Game.findMany({where: {editeurId: parseInt(req.params.id)}}); 
-    res.render("Editeurs/index", {jeu});
-})
+app.get("/Editeurs/:id/jde", async (req, res) => {
+    const editeurId = parseInt(req.params.id);
 
+    try {
+        const editeur = await prisma.Editeur.findUnique({
+            where: { id: editeurId },
+            include: { jeux: true }, // Assure-toi que "jeux" est bien la relation définie dans Prisma
+        });
+
+        if (!editeur) {
+            return res.status(404).send("Éditeur introuvable.");
+        }
+
+        res.render("Editeurs/editeur-details", { editeur, jeux: editeur.jeux });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des jeux :", error);
+        res.status(500).send("Erreur interne du serveur.");
+    }
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

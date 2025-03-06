@@ -1,27 +1,33 @@
-<!--formulaire de modification d'un jeu-->
-<form action="/Jeux/{{jeu.id}}/edit" method="POST">
-  <label for="titre">Titre</label>
-  <input type="text" name="titre" value="{{jeu.titre}}" required />
+<h1>Modifier un jeu</h1>
 
-  <label for="description">Description</label>
-  <textarea name="description" required>{{jeu.description}}</textarea>
+<div class="form-container">
+    <form action="/Jeux/{{jeu.id}}/edit" method="POST">
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" value="{{jeu.titre}}" required>
 
-  <label for="releaseDate">Date de sortie</label>
-  <input type="date" name="releaseDate" value="{{jeu.releaseDate}}" required />
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required>{{jeu.description}}</textarea>
 
-  <label for="genreId">Genre</label>
-  <select name="genreId" required>
-    {{#each genres}}
-      <option value="{{id}}" {{#if selected}}selected{{/if}}>{{nom}}</option>
-    {{/each}}
-  </select>
+        <label for="releaseDate">Date de sortie :</label>
+        <input type="date" id="releaseDate" name="releaseDate" value="{{jeu.releaseDate}}" required>
 
-  <label for="editeurId">Éditeur</label>
-  <select name="editeurId" required>
-    {{#each editeurs}}
-      <option value="{{id}}" {{#if selected}}selected{{/if}}>{{nom}}</option>
-    {{/each}}
-  </select>
+        <label for="genreId">Genre :</label>
+        <select id="genreId" name="genreId" required>
+            {{#each genres}}
+                <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.nom}}</option>
+            {{/each}}
+        </select>
 
-  <button type="submit">Mettre à jour</button>
-</form>
+        <label for="editeurId">Éditeur :</label>
+        <select id="editeurId" name="editeurId" required>
+            {{#each editeurs}}
+                <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.nom}}</option>
+            {{/each}}
+        </select>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+
+    <p><a href="/Jeux">← Retour à la page précédente</a></p>
+</div>
+

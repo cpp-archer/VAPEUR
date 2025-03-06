@@ -1,40 +1,33 @@
-<!-- Affiche toutes les informations relative au jeu selectioné -->
-<h2>Titre : {{jeu.titre}}</h2>
-<p>Description : {{jeu.description}}</p>
-<p>Date de sortie : {{jeu.releaseDate}}</p>
-<p>Genre : <a href="/Genres/{{jeu.genre.id}}/jdg"> {{jeu.genre.nom}}</a></p>
-
-
-{{#if jeu.editeur}}
-        <p>Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
-{{else}}
-        <p>Éditeur : Non renseigné </p>
-{{/if}}
-
-
-
-<!-- Boutton suprimer -->
-<form action="/Jeux/{{jeu.id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu ?');">
-    <button type="submit" style="color: white; background-color: red; padding: 10px 20px; border: none; border-radius: 5px;">Supprimer ce jeu</button>
-</form>
-
-    {{#if jeu.enAvant}}
-    <form action="/Jeux/{{jeu.id}}/notEnAvant" method="POST">
-    <button type="submit" style="color: white; background-color: green; padding: 10px 20px; border: none; border-radius: 5px;">
-         Retirer de la mise en avant
-    </button>
-</form>
-       
-    {{else}}
+<div class="jeu-container">
+    <h2 class="jeu-titre">Titre : {{jeu.titre}}</h2>
+    <p class="jeu-description">Description : {{jeu.description}}</p>
+    <p class="jeu-info">Date de sortie : {{jeu.releaseDate}}</p>
+    <p class="jeu-info">Genre : <a href="/Genres/{{jeu.genre.id}}/jdg">{{jeu.genre.nom}}</a></p>
     
-<form action="/Jeux/{{jeu.id}}/enAvant" method="POST">
-    <button type="submit" style="color: white; background-color: green; padding: 10px 20px; border: none; border-radius: 5px;">
-        Mettre en avant
-    </button>
-</form>
+    {{#if jeu.editeur}}
+        <p class="jeu-info">Éditeur : <a href="/Editeurs/{{jeu.editeur.id}}/jde">{{jeu.editeur.nom}}</a></p> 
+    {{else}}
+        <p class="jeu-info">Éditeur : Non renseigné</p>
     {{/if}}
+    
+    <div class="jeu-actions">
+        <form action="/Jeux/{{jeu.id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu ?');">
+            <button class="btn-supprimer" type="submit">Supprimer ce jeu</button>
+        </form>
 
+        {{#if jeu.enAvant}}
+            <form action="/Jeux/{{jeu.id}}/notEnAvant" method="POST">
+                <button class="btn-toggle" type="submit">Retirer de la mise en avant</button>
+            </form>
+        {{else}}
+            <form action="/Jeux/{{jeu.id}}/enAvant" method="POST">
+                <button class="btn-toggle" type="submit">Mettre en avant</button>
+            </form>
+        {{/if}}
+    </div>
 
-<p><a href="/Jeux/{{jeu.id}}/edit">Modifier le jeu</a></p>
-
-<p><a href="/Jeux">Retour à la liste des jeux</a></p>
+    <div class="jeu-navigation">
+        <a class="btn-modifier" href="/Jeux/{{jeu.id}}/edit">Modifier le jeu</a>
+        <a class="btn-retour" href="/Jeux">Retour à la liste des jeux</a>
+    </div>
+</div>

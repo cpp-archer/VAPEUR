@@ -1,32 +1,23 @@
-{{#if editeurs}}
-    <h1>Liste des editeurs</h1>
-{{/if}}
-
-{{#if jeu}}
-    <h1>Liste des jeux de l'editeur</h1>
-{{/if}}
-
-
-<ul>
-    {{#each editeurs}} 
+<div class="jeu-container">
+    <h2 class="jeu-titre">Liste des éditeurs</h2>
     
-        <li>
-            <a href="/Editeurs/{{id}}/jde">{{nom}}</a>
-            <form action="/Editeurs/{{id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet éditeur ?');">
-                <button type="submit" style="color: white; background-color: red; padding: 5px 10px; border: none; border-radius: 5px;">Supprimer l'éditeur</button>
-            </form>
-            <p><a href="/Editeurs/{{id}}/edit">Modifier un éditeur</a></p>
-        </li>
-    {{/each}}
-
-    {{#each jeu}}
-        <li>
-            <a href="/Jeux/{{id}}/details">{{titre}}</a>
-            
-        </li>
-    {{/each}}
-</ul>
-
-
-<p><a href="/Editeurs/Ajouter">Ajouter un éditeur</a></p>
-<p><a href="../">RETOUR à la page precedente</a> </p>
+    <div class="jeu-liste">
+        {{#each editeurs}}
+            <div class="editeur-card">
+                <p class="jeu-info">Nom : <a class="badge" href="/Editeurs/{{id}}/jde">{{nom}}</a></p>
+                
+                <div class="jeu-actions">
+                    <form action="/Editeurs/{{id}}/delete?_method=DELETE" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet éditeur ?');">
+                        <button class="btn-supprimer" type="submit">Supprimer l'éditeur</button>
+                    </form>
+                    <a class="btn-modifier" href="/Editeurs/{{id}}/edit">Modifier l'éditeur</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    
+    <div class="jeu-navigation">
+        <a class="btn-ajouter" href="/Editeurs/Ajouter">Ajouter un éditeur</a>
+        <a class="btn-retour" href="../">Retour à la page précédente</a>
+    </div>
+</div>

@@ -5,17 +5,21 @@
 {{#if jeu}}
     <h1>Liste des jeux du genre</h1>
 {{/if}}
-<ul>
-    {{#each genres}} 
-        <li>
-            <a href="/Genres/{{id}}/jdg">{{nom}}</a> 
-        </li>
-    {{/each}}
-    {{#each jeu}}
-        <li>
-            <a href="/Jeux/{{id}}/details">{{titre}}</a> 
-        </li>
-    {{/each}}
-</ul>
 
+<div class = "conteneur-liste">
+    <ul>
+        {{#each genres}} 
+            <li>
+                <a href="/Genres/{{id}}/jdg">{{nom}}</a> 
+            </li>
+        {{/each}}
+        {{#each jeu}}
+            <li>
+                <a href="/Jeux/{{id}}/details">{{titre}}</a> 
+            </li>
+        {{else}}
+            <p>Aucun jeu associé à ce genre.</p>
+        {{/each}}
+    </ul>
+</div>
 <a href="../">RETOUR à la page precedente</a> 

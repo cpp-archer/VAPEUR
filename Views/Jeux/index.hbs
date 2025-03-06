@@ -1,14 +1,14 @@
 <!--Index.hbs des jeux-->
 <h1>Liste des jeux</h1>
-
-<ul>
-    {{#each jeux}} 
-        <li>
-            <a href="/Jeux/{{id}}/details">{{titre}}</a>
-        </li>
-    {{/each}}
-</ul>
-
+<div class = "conteneur-liste">
+    <ul>
+        {{#each jeux}} 
+            <li>
+                <a href="/Jeux/{{id}}/details">{{titre}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
 <p><a href="/Jeux/Ajouter">Ajouter un jeu</a></p>
 
 <p><a href="../">RETOUR à la page precedente</a></p>   

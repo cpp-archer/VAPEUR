@@ -1,0 +1,16 @@
+<div class="jeu-container">
+    <h2 class="jeu-titre">Éditeur : {{editeur.nom}}</h2>
+
+    <h3>Jeux de cet éditeur :</h3>
+    <ul>
+        {{#each jeux}}
+            <li><a href="/Jeux/{{this.id}}/details">{{this.titre}}</a></li>
+        {{else}}
+            <p>Aucun jeu associé à cet éditeur.</p>
+        {{/each}}
+    </ul>
+
+    <div class="jeu-navigation">
+        <a class="btn-retour" href="/Editeurs">Retour à la liste des éditeurs</a>
+    </div>
+</div>

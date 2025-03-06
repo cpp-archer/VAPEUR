@@ -1,0 +1,275 @@
+/* Appliquer une police moderne */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+/* Style général */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121826;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Conteneur des liens */
+.accueil {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px; /* Augmente l'espacement entre les boutons */
+}
+
+/* Style pour les liens */
+a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+
+    background: linear-gradient(135deg, #6C63FF, #4F46E5);
+    padding: 12px 25px;
+    margin: 15px; /* Augmente l'espacement autour */
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 10px rgba(108, 99, 255, 0.4);
+}
+
+a:hover {
+    background: linear-gradient(135deg, #7D76FF, #5B50FF);
+    transform: scale(1.05);
+}
+
+/* Style des listes */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #1E293B;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+li:hover {
+    background: #334155;
+}
+
+/* Boutons */
+button {
+    background: linear-gradient(135deg, #FF6B6B, #FF4757);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+    box-shadow: 0px 4px 10px rgba(255, 107, 107, 0.4);
+    margin: 15px; /* Espacement entre les boutons */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #FF8585, #FF5E5E);
+    transform: scale(1.05);
+}
+
+/* Conteneur des listes */
+.conteneur-liste {
+    display: flex;
+    justify-content: center;
+    margin: 2%;
+    background-color: #1E293B;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+
+/* Formulaire */
+
+/* Conteneur du formulaire */
+.form-container {
+    background-color: #1E293B;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Style des labels */
+form label {
+    display: block;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #A3BFFA;
+    text-align: left;
+}
+
+/* Champs de saisie */
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #2D3748;
+    color: #ffffff;
+    transition: border 0.3s;
+}
+
+/* Focus sur les champs */
+form input:focus, form select:focus, form textarea:focus {
+    border: 2px solid #6C63FF;
+    outline: none;
+}
+
+/* Champ de description plus grand */
+form textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Bouton stylisé */
+form button {
+    background: linear-gradient(135deg, #6C63FF, #4F46E5);
+    color: white; 
+    padding: 12px 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s;  
+    box-shadow: 0px 4px 10px rgba(108, 99, 255, 0.4);
+}
+
+form button:hover {
+    background: linear-gradient(135deg, #7D76FF, #5B50FF);
+    transform: scale(1.05);
+}
+
+/* Lien de retour */
+.form-container a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+
+    background: linear-gradient(135deg, #6C63FF, #4F46E5);
+    padding: 12px 25px;
+    margin: 15px; /* Augmente l'espacement autour */
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 10px rgba(108, 99, 255, 0.4);
+}
+
+.form-container a:hover {
+    color: #A3BFFA;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.jeu-container {
+    background-color: #1E293B;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    text-align: center;
+}
+
+.jeu-titre {
+    color: #A3BFFA;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.jeu-description  {
+    color: #f0f0f0;
+    margin-bottom: 8px;
+    margin-top: 20;
+}
+
+.jeu-info {
+    color: #f0f0f0;
+    margin-bottom: 8px;
+    margin: 10%;
+}
+
+.jeu-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+
+.btn-supprimer {
+    background: linear-gradient(135deg, #FF6B6B, #FF4757);
+    color: white;
+}
+
+.btn-supprimer:hover {
+    background: linear-gradient(135deg, #FF8585, #FF5E5E);
+}
+
+.btn-toggle {
+    background: linear-gradient(135deg, #6C63FF, #4F46E5);
+    color: white;
+}
+
+.btn-toggle:hover {
+    background: linear-gradient(135deg, #7D76FF, #5B50FF);
+}
+
+.jeu-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-modifier, .btn-retour {
+    background: linear-gradient(135deg, #6C63FF, #4F46E5);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-modifier:hover, .btn-retour:hover {
+    background: linear-gradient(135deg, #7D76FF, #5B50FF);
+}
+
+
+.editeur-card{
+    background-color: rgb(39, 76, 136);
+    padding: 10px;
+    margin: 4%;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    
+
+}
